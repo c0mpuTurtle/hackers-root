@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>랜덤 단어</title>
+    <link href="https://cdn.jsdelivr.net/npm/suitcss@0.0.1/dist/suit.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e0f2fe;
+            font-family: 'SUIT Variable', 'Pretendard', sans-serif;
+            color: #0c4a6e;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+        .header-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.7rem;
+            font-weight: 700;
+            gap: 0.5rem;
+            color: #0c4a6e;
+        }
+        main {
+            padding: 4rem 1rem;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 880px;
+            margin: auto;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0c4a6e;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        form input {
+            margin: 0 0.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        table, th, td {
+            border: 1px solid #bae6fd;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: center;
+        }
+        th {
+            background-color: #d5f0fe;
+        }
+        button {
+            margin-top: 1rem;
+            background-color: #0c4a6e;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+        }
+    </style>
+    <script>
+        function showAllAnswers() {
+            const answers = document.querySelectorAll('[id^="kor-"]');
+            answers.forEach(e => e.style.display = 'inline');
+            document.getElementById('show-all-btn').style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+<header>
+    <div class="header-title">
+        📖 랜덤 단어 학습
+    </div>
+</header>
+
+<main>
+    <div class="card">
+        <h2>랜덤 단어 30개</h2>
+
+        <form method="get" action="/word/random">
+            <label>시작 주차:
+                <input type="number" name="startWeek" th:value="${startWeek}" min="1">
+            </label>
+            <label>끝 주차:
+                <input type="number" name="endWeek" th:value="${endWeek}" min="1">
+            </label>
+            <button type="submit">조회</button>
+        </form>
+
+        <form method="get" action="/word/random" style="text-align:center;">
+            <input type="hidden" name="startWeek" th:value="${startWeek}">
+            <input type="hidden" name="endWeek" th:value="${endWeek}">
+            <button type="submit">다시 랜덤 돌리기</button>
+        </form>
+
+        <div style="text-align:center;">
+            <button id="show-all-btn" onclick="showAllAnswers()">정답 모두 보기</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>영어</th>
+                <th>뜻</th>
+                <th>주차</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="word, stat : ${words}">
+                <td th:text="${word.eng}"></td>
+                <td>
+                    <span th:id="'kor-' + ${stat.index}" th:text="${word.kor}" style="display:none;"></span>
+                </td>
+                <td th:text="${word.day}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>

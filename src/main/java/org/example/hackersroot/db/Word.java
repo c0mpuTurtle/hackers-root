@@ -26,7 +26,7 @@ public class Word {
     private int day;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "root_id", columnDefinition = "bigint", nullable = false)
+    @JoinColumn(name = "root_id", columnDefinition = "bigint", nullable = true)
     private Root root;
 
     @Builder
