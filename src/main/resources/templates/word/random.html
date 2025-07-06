@@ -124,6 +124,7 @@
         <table>
             <thead>
             <tr>
+                <th>번호</th> <!-- 추가 -->
                 <th>영어</th>
                 <th>뜻</th>
                 <th>주차</th>
@@ -131,6 +132,7 @@
             </thead>
             <tbody>
             <tr th:each="word, stat : ${words}">
+                <td th:text="${stat.count}"></td> <!-- 행 번호 -->
                 <td th:text="${word.eng}"></td>
                 <td>
                     <span th:id="'kor-' + ${stat.index}" th:text="${word.kor}" style="display:none;"></span>
@@ -138,6 +140,7 @@
                 <td th:text="${word.day}"></td>
             </tr>
             </tbody>
+
         </table>
     </div>
 </main>
