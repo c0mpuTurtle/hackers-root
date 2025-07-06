@@ -102,10 +102,10 @@
         <h2>랜덤 단어 30개</h2>
 
         <form method="get" action="/word/random">
-            <label>시작 주차:
+            <label>START DAY:
                 <input type="number" name="startWeek" th:value="${startWeek}" min="1">
             </label>
-            <label>끝 주차:
+            <label>END DAY:
                 <input type="number" name="endWeek" th:value="${endWeek}" min="1">
             </label>
             <button type="submit">조회</button>
@@ -127,7 +127,7 @@
                 <th>번호</th> <!-- 추가 -->
                 <th>영어</th>
                 <th>뜻</th>
-                <th>주차</th>
+                <th>DAY</th>
             </tr>
             </thead>
             <tbody>
