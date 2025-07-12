@@ -80,6 +80,12 @@
             background-color: #e0f2fe;
             color: #0c4a6e;
         }
+
+        td.english {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
     </style>
     <script>
         function showAllAnswers() {
@@ -133,7 +139,7 @@
             <tbody>
             <tr th:each="word, stat : ${words}">
                 <td th:text="${stat.count}"></td> <!-- 행 번호 -->
-                <td th:text="${word.eng}"></td>
+                <td class="english" th:text="${word.eng}"></td>
                 <td>
                     <span th:id="'kor-' + ${stat.index}" th:text="${word.kor}" style="display:none;"></span>
                 </td>
